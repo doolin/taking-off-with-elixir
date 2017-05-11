@@ -13,6 +13,12 @@ defmodule PhysicsTest do
   test 'escape velocity of planet X is correct' do
     planet_x = %{mass: 4.0e22, radius: 6.21e6}
     ev = planet_x |> Physics.Rocketry.escape_velocity
-    assert ev == 0.9
+    assert ev == 1.0
+  end
+
+  test "Converter 1 works" do
+    c = Converter.to_light_seconds({:miles, 1000}, precision: 5)
+    # c |> IO.puts # IO.puts returns :ok
+    assert c == 0.00537
   end
 end
