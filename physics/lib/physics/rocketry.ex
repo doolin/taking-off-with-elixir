@@ -4,16 +4,6 @@ defmodule Physics.Planet do
     radius: 6.371e6,
     mass: 5.97e24
   ]
-
-  # def escape_velocity(planet) do
-    #   g = 6.67e-11
-    # gmr = 2 * g * planet.mass/planet.radius_m
-    # vms = :math.sqrt gmr
-    # vkms = vms/1000
-    # Float.ceil vkms, 1
-    # end
-
-  # v = %Physics.Planet{} |> Physics.Planet.escape_velocity
 end
 
 defmodule ConverterTwo do
@@ -53,7 +43,7 @@ defmodule Converter do
     (miles * 5.36819e-6) |> round_to(precision)
   end
 
-  def to_light_seconds(%{meters: meters} = val, precision: precision) do
+  def to_light_seconds({:meters, meters} = val, precision: precision) do
     (meters * 3.335638620368e-9) |> round_to(precision)
   end
 
@@ -65,7 +55,7 @@ defmodule Converter do
     (inches * 8.472522095734715723e-11) |> round_to(precision)
   end
 
-  defp round_to(val, precision) when is_float(val) when is_float(val) do
+  defp round_to(val, precision \\ 5) when is_float(val) when is_float(val) do
     Float.round(val, precision)
   end
 end
@@ -92,11 +82,5 @@ defmodule Physics.Rocketry do
   defp calculate_escape(%{mass: mass, radius: radius}) do
     newtons_constant = 6.67e-11
     2 * newtons_constant * mass / radius |> :math.sqrt
-  end
-end
-
-defmodule Convertor do
-  def to_nearest_tenth(val) do
-    Float.round(val, 1)
   end
 end
