@@ -65,6 +65,14 @@ defmodule Physics.Rocketry do
     %{mass: 5.97e24, radius: 6.371e6} |> escape_velocity
   end
 
+  def escape_velocity(:mars) do
+    %{mass: 6.39e23, radius: 3.4e6} |> escape_velocity
+  end
+
+  def escape_velocity(:moon) do
+    %{mass: 7.35e22, radius: 1.738e6} |> escape_velocity
+  end
+
   def escape_velocity(planet) when is_map(planet) do
     planet |> calculate_escape # (%{mass: mass, radius: radius})
            |> Converter.to_km
