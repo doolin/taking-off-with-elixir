@@ -6,22 +6,45 @@ defmodule PhysicsTest do
     assert 1 + 1 == 2
   end
 
-  test 'escape velocity of earth is correct' do
-    assert Physics.Rocketry.escape_velocity(:earth) == 11.2
+  describe "escape_velocity" do
+    test 'of earth is correct' do
+      assert Physics.Rocketry.escape_velocity(:earth) == 11.2
+    end
+
+    test 'of mars is correct' do
+      assert Physics.Rocketry.escape_velocity(:mars) == 5.1
+    end
+
+    test 'of moon is correct' do
+      assert Physics.Rocketry.escape_velocity(:moon) == 2.4
+    end
+
+    test 'of planet X is correct' do
+      planet_x = %{mass: 4.0e22, radius: 6.21e6}
+      ev = planet_x |> Physics.Rocketry.escape_velocity
+      assert ev == 1.0
+    end
   end
 
-  test 'escape velocity of mars is correct' do
-    assert Physics.Rocketry.escape_velocity(:mars) == 5.1
+  describe "orbital_height" do
+    @tag :skip
+    test "for period 4 hours" do
+      height = Physics.Rocketry.orbital_height(4 * 3600)
+      assert height == 1.0
+    end
   end
 
-  test 'escape velocity of moon is correct' do
-    assert Physics.Rocketry.escape_velocity(:moon) == 2.4
+  describe "orbital_term" do
+   test "for 100km above earth" do
+     term = Physics.Rocketry.orbital_term(100)
+     assert term == 1.4397410411723914
+   end
   end
 
-  test 'escape velocity of planet X is correct' do
-    planet_x = %{mass: 4.0e22, radius: 6.21e6}
-    ev = planet_x |> Physics.Rocketry.escape_velocity
-    assert ev == 1.0
+  describe "orbital_acceleration" do
+    test 'at 100 km is 9.51' do
+      assert Physics.Rocketry.orbital_acceleration(100) == 9.51
+    end
   end
 
   describe "Converter" do
