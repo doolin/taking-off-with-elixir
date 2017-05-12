@@ -4,9 +4,9 @@ defmodule Physics.Rocketry do
   import Physics.Laws
   import Planets
 
-  def escape_velocity(:earth), do: earth |> escape_velocity
-  def escape_velocity(:mars),  do: mars |> escape_velocity
-  def escape_velocity(:moon), do: moon |> escape_velocity
+  def escape_velocity(:earth), do: earth() |> escape_velocity
+  def escape_velocity(:mars),  do: mars() |> escape_velocity
+  def escape_velocity(:moon), do: moon() |> escape_velocity
 
   def escape_velocity(planet) when is_map(planet) do
     planet |> calculate_escape
@@ -15,7 +15,7 @@ defmodule Physics.Rocketry do
   end
 
   def orbital_speed(height) do
-    newtons_gravitational_constant * Planets.earth.mass / orbital_radius(height)
+    newtons_gravitational_constant() * Planets.earth.mass / orbital_radius(height)
       |> square_root
   end
 
@@ -23,7 +23,7 @@ defmodule Physics.Rocketry do
   # because at the moment they are not correct.
   def orbital_height(term) do
     divisor = 4 * (:math.pi |> squared)
-    numerator = newtons_gravitational_constant * Planets.earth.mass * (term |> squared)
+    numerator = newtons_gravitational_constant() * Planets.earth.mass * (term |> squared)
     (((numerator / divisor) |> cube_root) - Planets.earth.radius) |> to_km
   end
 
@@ -33,7 +33,7 @@ defmodule Physics.Rocketry do
 
   def orbital_term(height) do
     4 * (:math.pi |> squared) * (orbital_radius(height) |> cubed) /
-    (newtons_gravitational_constant * earth.mass)
+    (newtons_gravitational_constant() * earth().mass)
     |> square_root
     |> seconds_to_hours
   end
@@ -55,6 +55,6 @@ defmodule Physics.Rocketry do
   end
 
   defp calculate_escape(%{mass: mass, radius: radius}) do
-    2 * newtons_gravitational_constant * mass / radius |> square_root
+    2 * newtons_gravitational_constant() * mass / radius |> square_root
   end
 end
