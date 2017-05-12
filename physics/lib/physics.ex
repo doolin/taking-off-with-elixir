@@ -3,16 +3,6 @@ defmodule Physics do
   Documentation for Physics.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Physics.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  alias Physics.Rocketry, as: Astrophysics
+  alias Physics.Laws
 end
