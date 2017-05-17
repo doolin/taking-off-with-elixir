@@ -36,10 +36,11 @@ defmodule Physics.Rocketry do
     (newtons_gravitational_constant() * earth().mass)
     |> square_root
     |> seconds_to_hours
+    |> to_nearest_tenth
   end
 
   def orbital_acceleration(height) do
-    (orbital_speed(height) |> squared) / orbital_radius(height) |> to_nearest_hundredth
+    (orbital_speed(height) |> squared) / orbital_radius(height) # |> to_nearest_hundredth
   end
 
   defp orbital_radius(height) do

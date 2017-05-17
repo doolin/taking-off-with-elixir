@@ -29,4 +29,59 @@ defmodule SolarTest do
     d = Solar.deadliest(flares)
     assert d == 99000
   end
+
+  test "total flare power using recursion", %{data: flares} do
+    power = Solar.total_flare_power(flares)
+    assert power == 147717.966
+  end
+
+  @tag :skip
+  test "total flare power using enums", %{data: flares} do
+    power = Solar.total_flare_power_enum(flares)
+    assert power == 147717.966
+  end
+
+  test "a list of flares", %{data: flares} do
+    result = Solar.flare_list(flares)
+    assert result == [
+      {:power, 99000, :is_deadly, true},
+      {:power, 58.0, :is_deadly, false},
+      {:power, 12.0, :is_deadly, false},
+      {:power, 3.2, :is_deadly, false},
+      {:power, 836.0, :is_deadly, false},
+      {:power, 2.5, :is_deadly, false},
+      {:power, 72000, :is_deadly, true},
+      {:power, 45000, :is_deadly, true}
+    ]
+  end
+
+  test "a flare list with comprehensions", %{data: flares} do
+    result = Solar.flare_list(flares)
+    assert result == [
+      {:power, 99000, :is_deadly, true},
+      {:power, 58.0, :is_deadly, false},
+      {:power, 12.0, :is_deadly, false},
+      {:power, 3.2, :is_deadly, false},
+      {:power, 836.0, :is_deadly, false},
+      {:power, 2.5, :is_deadly, false},
+      {:power, 72000, :is_deadly, true},
+      {:power, 45000, :is_deadly, true}
+    ]
+  end
+
+  @tag :skip
+  test "a flare list with enums", %{data: flares} do
+    Solar.flare_list_enums(flares) |> IO.inspect
+    result = Solar.flare_list_enums(flares) |> IO.inspect
+    assert result == [
+      {:power, 99000, :is_deadly, true},
+      {:power, 58.0, :is_deadly, false},
+      {:power, 12.0, :is_deadly, false},
+      {:power, 3.2, :is_deadly, false},
+      {:power, 836.0, :is_deadly, false},
+      {:power, 2.5, :is_deadly, false},
+      {:power, 72000, :is_deadly, true},
+      {:power, 45000, :is_deadly, true}
+    ]
+  end
 end
