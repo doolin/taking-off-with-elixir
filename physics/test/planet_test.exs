@@ -1,5 +1,6 @@
 defmodule PlanetTest do
   use ExUnit.Case
+  import Planet
 
   setup do
     planets = [
@@ -54,5 +55,15 @@ defmodule PlanetTest do
   test "a comprehension with a filter, matched", %{planets: planets} do
     planet_names = for %{name: name, type: type} <- planets, type == :rocky, do: name
     assert planet_names == ["Mercury", "Venus", "Earth", "Mars"]
+  end
+
+  describe "escape_velocity" do
+    test 'of earth is correct' do
+      assert Planet.escape_velocity(Planet.select[:earth]) == 11.2
+    end
+
+    test 'of mars is correct' do
+      assert Planet.escape_velocity(Planet.select[:mars]) == 5.1
+    end
   end
 end

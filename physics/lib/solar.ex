@@ -3,6 +3,10 @@ defmodule Solar do
   def power(%{classification: :X, scale: s}), do: s * 1000
   def power(%{classification: :C, scale: s}), do: s
 
+  # def power(%{classification: :M, scale: s}), do: s * 10 * 0.92
+  # def power(%{classification: :X, scale: s}), do: s * 1000 * 0.68
+  # def power(%{classification: :C, scale: s}), do: s * 0.78
+
   def no_eva(flares) do
     Enum.filter flares, fn(flare) ->
       power(flare) > 1000
@@ -20,17 +24,20 @@ defmodule Solar do
   def total_flare_power([], total), do: total
 
   def total_flare_power([%{classification: :M, scale: s} | tail], total) do
-    new_total = s * 10 * 0.92 + total
+    # new_total = s * 10 * 0.92 + total
+    new_total = s * 10 + total
     total_flare_power(tail, new_total)
   end
 
   def total_flare_power([%{classification: :C, scale: s} | tail], total) do
-    new_total = s *  0.78 + total
+    # new_total = s *  0.78 + total
+    new_total = s + total
     total_flare_power(tail, new_total)
   end
 
   def total_flare_power([%{classification: :X, scale: s} | tail], total) do
-    new_total = s * 1000 * 0.68 + total
+    # new_total = s * 1000 * 0.68 + total
+    new_total = s * 1000 + total
     total_flare_power(tail, new_total)
   end
 
@@ -48,5 +55,9 @@ defmodule Solar do
   end
 
   def flare_list_enums(flares) do
+    Enum.map flares, fn(flare) ->
+      p = power(flare)
+      {:power, p, :is_deadly, p > 1000}
+    end
   end
 end
