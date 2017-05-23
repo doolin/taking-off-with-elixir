@@ -30,7 +30,8 @@ defmodule Physics.Mixfile do
   defp deps do
     [
       {:credo, "~>0.7", only: [:dev, :test]},
-      {:timex, "~>3.0"}
+      {:timex, "~>3.0"},
+      {:amnesia, github: "meh/amnesia", tag: :master}
     ]
   end
 end
