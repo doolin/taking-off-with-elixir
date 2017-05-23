@@ -4,14 +4,14 @@ defmodule SolarTest do
 
   setup do
     flares = [
-      %{classification: :X, scale: 99, date: Date.from_erl({1859, 8, 29})},
-      %{classification: :M, scale: 5.8, date: Date.from_erl({2015, 1, 12})},
-      %{classification: :M, scale: 1.2, date: Date.from_erl({2015, 2, 9})},
-      %{classification: :C, scale: 3.2, date: Date.from_erl({2015, 4, 18})},
-      %{classification: :M, scale: 83.6, date: Date.from_erl({2015, 6, 23})},
-      %{classification: :C, scale: 2.5, date: Date.from_erl({2015, 7, 4})},
-      %{classification: :X, scale: 72, date: Date.from_erl({2012, 7, 23})},
-      %{classification: :X, scale: 45, date: Date.from_erl({2003, 11, 4})}
+      %{classification: :X, stations: 10, scale: 99, date: Date.from_erl({1859, 8, 29})},
+      %{classification: :M, stations: 10, scale: 5.8, date: Date.from_erl({2015, 1, 12})},
+      %{classification: :M, stations: 6, scale: 1.2, date: Date.from_erl({2015, 2, 9})},
+      %{classification: :C, stations: 6, scale: 3.2, date: Date.from_erl({2015, 4, 18})},
+      %{classification: :M, stations: 7, scale: 83.6, date: Date.from_erl({2015, 6, 23})},
+      %{classification: :C, stations: 10, scale: 2.5, date: Date.from_erl({2015, 7, 4})},
+      %{classification: :X, stations: 2, scale: 72, date: Date.from_erl({2012, 7, 23})},
+      %{classification: :X, stations: 4, scale: 45, date: Date.from_erl({2003, 11, 4})}
     ]
     {:ok, data: flares}
   end
@@ -41,7 +41,8 @@ defmodule SolarTest do
   test "total flare power using enums", %{data: flares} do
     power = Solar.total_flare_power_enum(flares)
     # assert power == 147717.966
-    assert power == 216911.7
+    # assert power == 216911.7
+    assert power == 228611.7
   end
 
   test "a list of flares", %{data: flares} do
@@ -53,8 +54,8 @@ defmodule SolarTest do
       {:power, 3.2, :is_deadly, false},
       {:power, 836.0, :is_deadly, false},
       {:power, 2.5, :is_deadly, false},
-      {:power, 72000, :is_deadly, true},
-      {:power, 45000, :is_deadly, true}
+      {:power, 7.92e4, :is_deadly, true},
+      {:power, 49500.00000000001, :is_deadly, true}
     ]
   end
 
@@ -67,8 +68,8 @@ defmodule SolarTest do
       {:power, 3.2, :is_deadly, false},
       {:power, 836.0, :is_deadly, false},
       {:power, 2.5, :is_deadly, false},
-      {:power, 72000, :is_deadly, true},
-      {:power, 45000, :is_deadly, true}
+      {:power, 7.92e4, :is_deadly, true},
+      {:power, 49500.00000000001, :is_deadly, true}
     ]
   end
 
@@ -83,8 +84,8 @@ defmodule SolarTest do
       {:power, 3.2, :is_deadly, false},
       {:power, 836.0, :is_deadly, false},
       {:power, 2.5, :is_deadly, false},
-      {:power, 72000, :is_deadly, true},
-      {:power, 45000, :is_deadly, true}
+      {:power, 7.92e4, :is_deadly, true},
+      {:power, 49500.00000000001, :is_deadly, true}
     ]
   end
 end

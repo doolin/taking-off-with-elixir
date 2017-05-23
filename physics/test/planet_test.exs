@@ -1,6 +1,5 @@
 defmodule PlanetTest do
   use ExUnit.Case
-  import Planet
 
   setup do
     planets = [
