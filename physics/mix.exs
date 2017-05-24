@@ -15,7 +15,7 @@ defmodule Physics.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :timex]]
+    [extra_applications: [:logger, :timex, :postgrex, :ecto]]
   end
 
   # Dependencies can be Hex packages:
@@ -31,7 +31,9 @@ defmodule Physics.Mixfile do
     [
       {:credo, "~>0.7", only: [:dev, :test]},
       {:timex, "~>3.0"},
-      {:amnesia, github: "meh/amnesia", tag: :master}
+      {:amnesia, github: "meh/amnesia", tag: :master},
+      {:postgrex, ">= 0.0.0"},
+      {:ecto, "~> 2.0.0-rc-0"}
     ]
   end
 end

@@ -7,7 +7,7 @@ defmodule SolarFlareRecorder do
 
   def record_flare(pid, {:flare, classification: c, scale: s} = flare) do
     Agent.get_and_update pid, fn(flares) ->
-      new_state = List.insert_at flares, -1 flare
+      new_state = List.insert_at flares, -1, flare
       {:ok, new_state}
     end
   end
